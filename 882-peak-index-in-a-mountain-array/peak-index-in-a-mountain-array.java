@@ -18,3 +18,4 @@ class Solution {
         return low;
     }
 }
+// jha increasing order hai wha chalte chale peak apne aap mil jaega its that simple bro.

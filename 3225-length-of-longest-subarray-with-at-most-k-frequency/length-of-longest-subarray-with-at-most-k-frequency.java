@@ -7,7 +7,6 @@ class Solution {
         HashMap<Integer,Integer> map = new HashMap<>();
         while(i<n && j<n){
             int a = nums[j];
-            
             map.put(nums[j],map.getOrDefault(nums[j],0)+1);
             j++;
             while( i<n && map.get(a)>k){

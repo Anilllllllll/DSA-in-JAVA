@@ -23,6 +23,9 @@ class Solution {
             if(targetSum==root.val){
                 return true;
             }
+            else{
+                return false;
+            }
             
         }
 

@@ -1,40 +1,39 @@
+import java.util.Stack;
+
 class BrowserHistory {
 
-    ArrayList<String> history;
-    int current;
+    private Stack<String> back;
+    private Stack<String> forward;
+    private String currentPage;
+
     public BrowserHistory(String homepage) {
-        
-        history = new ArrayList<>();
-        history.add(homepage);
-        current =0;
-
+        back = new Stack<>();
+        forward = new Stack<>();
+        currentPage = homepage ;
     }
-    
+
     public void visit(String url) {
-        while(history.size()>current+1){
-            history.remove(history.size()-1);
-        }
-        history.add(url);
-        current++;
-
+        back.push(currentPage);
+        currentPage = url;
+        forward.clear();
+        
     }
-    
+
     public String back(int steps) {
-        current = Math.max(0,current-steps);
-        return history.get(current);
+        while (steps > 0 && !back.isEmpty()) {
+            forward.push(currentPage);
+            currentPage = back.pop();
+            steps--;
+        }
+        return currentPage;
     }
-    
-    public String forward(int steps) {
-        current = Math.min(history.size()-1,current+steps);
-        return history.get(current);
 
+    public String forward(int steps) {
+        while (steps > 0 && !forward.isEmpty()) {
+            back.push(currentPage);
+            currentPage = forward.pop();
+            steps--;
+        }
+        return currentPage;
     }
 }
-
-/**
- * Your BrowserHistory object will be instantiated and called as such:
- * BrowserHistory obj = new BrowserHistory(homepage);
- * obj.visit(url);
- * String param_2 = obj.back(steps);
- * String param_3 = obj.forward(steps);
- */

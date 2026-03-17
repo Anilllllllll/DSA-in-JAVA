@@ -3,7 +3,6 @@ class Solution {
         long ans = 0;
         long start = 1000;
         long commas = 1;
-
         while (start <= n) {
             long end = start * 1000 - 1;
             long cnt = Math.min(n, end) - start + 1;

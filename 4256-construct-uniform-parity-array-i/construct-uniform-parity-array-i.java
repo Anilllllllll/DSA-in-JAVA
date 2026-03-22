@@ -9,11 +9,11 @@ class Solution {
                 odd++;
         }
 
-        // If all even or all odd -> already uniform
+       
         if (even == nums1.length || odd == nums1.length)
             return true;
 
-        // If both odd and even exist -> we can make all odd
+       
         return true;
     }
 }

@@ -16,7 +16,6 @@ class Solution {
             if (board[0][j] == 'O') dfs(board, 0, j);
             if (board[n - 1][j] == 'O') dfs(board, n - 1, j);
         }
-
   
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {

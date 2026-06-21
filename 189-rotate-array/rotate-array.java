@@ -1,26 +1,39 @@
 class Solution {
     public void rotate(int[] nums, int k) {
         
-        int n = nums.length;
-        if(k==0 || k==n) return ;
-        if(k>n){
-            k=k%n;
-        }
-        int rem = n-k;
-        int[] arr = new int[rem];
-        for(int i=0; i<rem; i++){
-            arr[i]=nums[i];
-        }
-        int count=0;
-        int m=n-1;
-        for(int i=rem; i<n; i++){
-            nums[count++] = nums[i]; 
-        }
-        int j=0;
-        for(int i=count; i<n; i++){
-            nums[i]=arr[j++];
-        }
         
+        int n = nums.length;
+
+        k=k%n;
+        int last =n-1;
+        int i=0;
+        while(i<=last){
+            int temp = nums[i];
+            nums[i] = nums[last];
+            nums[last] = temp;
+            last--;
+            i++;
+            
+        }
+        int m = k-1;
+        int first=0;
+        while(first<=m){
+            int temp = nums[first];
+            nums[first] = nums[m];
+            nums[m] = temp;
+            m--;
+            first++;
+        }
+        int last2 = n-1;
+        int first2 =k;
+        while(first2<=last2){
+            int temp = nums[first2];
+            nums[first2] = nums[last2];
+            nums[last2] = temp;
+            last2--;
+            first2++;
+        }
+
 
     }
 }

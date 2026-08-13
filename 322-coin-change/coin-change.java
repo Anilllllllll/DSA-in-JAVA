@@ -1,57 +1,45 @@
 class Solution {
-
     public int coinChange(int[] coins, int amount) {
-        
+
+        if (amount == 0) {
+            return 0;
+        }
         int[][] dp = new int[coins.length][amount+1];
 
-        for(int row[] : dp){
-            Arrays.fill(row,-1);
+        for(int i=0; i<dp.length; i++){
+            Arrays.fill(dp[i],-1);
         }
-
-
-        int ans = find(coins,amount,0,dp);
-
-
-        if(ans == Integer.MAX_VALUE){
+        int ans = mincoin(coins, amount, 0,dp);
+        if (ans == 1000000) {
             return -1;
         }
 
         return ans;
     }
 
+    public static int mincoin(int[] coins, int amount, int i,int[][] dp) {
 
-    public static int find(int[] coins,int amount,int i,int[][] dp){
-
-
-        if(amount == 0){
+        if (amount == 0) {
             return 0;
         }
 
-
-        if(amount < 0 || i >= coins.length){
-            return Integer.MAX_VALUE;
+        if (i >= coins.length) {
+            return 1000000;
         }
 
-
-        if(dp[i][amount] != -1){
+        if(dp[i][amount]!=-1){
             return dp[i][amount];
         }
+        int take = 1000000;
 
-
-        int not_skip = find(coins, amount-coins[i], i, dp);
-
-
-        if(not_skip != Integer.MAX_VALUE){
-            not_skip = not_skip + 1;
+        if (amount >= coins[i]) {
+            take = 1 + mincoin(coins, amount - coins[i], i,dp);
         }
 
+        int skip = mincoin(coins, amount, i + 1,dp);
 
-        int skip = find(coins, amount, i+1, dp);
+        dp[i][amount] = Math.min(skip, take);
 
-
-        int min = Math.min(not_skip, skip);
-
-
-        return dp[i][amount] = min;
+        return dp[i][amount];
     }
 }

@@ -1,34 +1,30 @@
 class Solution {
-    public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        
-        List<List<Integer>> ans = new ArrayList<>();
-        List<Integer> ans2 = new ArrayList<>();
-         store(candidates,target,0,ans,ans2,0);
-        return ans;
+    public List<List<Integer>> combinationSum(int[] cand, int target) {
+        List<Integer> list1 = new ArrayList<>();
+        List<List<Integer>> list2 = new ArrayList<>();
+
+         sum(cand,target,0,list1,list2);
+         return list2;
+
     }
 
-    public static void  store(int[] arr,int target,int sum,List<List<Integer>> ans,List<Integer> ans2,int i){
+    public static void sum(int[] cand,int target,int i,List<Integer> list1, List<List<Integer>> list2){
 
-        if(sum==target){
-            ans.add(new ArrayList<>(ans2));
-            
+        if(target==0){
+            list2.add(new ArrayList<>(list1));
             return;
         }
-        if(sum>target || i>=arr.length){
-            
-            return;
+
+        if(i==cand.length || target<0){
+            return ;
         }
-        ans2.add(arr[i]);
 
-        store(arr,target,sum+arr[i],ans,ans2,i);
+        list1.add(cand[i]);
+        if(target>=cand[i]){
+        sum(cand,target-cand[i],i,list1,list2);
+        }
+        list1.remove(list1.size()-1);
+        sum(cand,target,i+1,list1,list2);
 
-        ans2.remove(ans2.size()-1);
-
-        store(arr,target,sum,ans,ans2,i+1);
-
-
-        
-        
-        
     }
 }

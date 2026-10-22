@@ -2,13 +2,13 @@ class Solution {
     public int passwordStrength(String password) {
         
         int count = 0;
-        HashMap<Character,Integer> map = new HashMap<>();
+        HashSet<Character> set = new HashSet<>();
         for(int i=0; i<password.length(); i++){
             char ch = password.charAt(i);
-            map.put(ch,1);
+            set.add(ch);
         }
 
-        for(char cha : map.keySet()){
+        for(char cha : set){
             
             if(cha>='a' && cha<='z'){
                 count++;
